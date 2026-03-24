@@ -72,14 +72,6 @@ JQDATASDK_PHONE=your_phone_number
 JQDATASDK_PASSWORD=your_password
 ```
 
-### 4. 准备 Qlib 数据
-
-按照 Qlib 官方文档下载 CSI300 数据到本地：
-```bash
-# 假设解压后的数据目录为
-~/Desktop/my-project/data/input/qlib_data/
-```
-
 确保 `config.yaml` 或 `config_qrun.yaml` 中的数据路径与实际目录一致。
 
 ---
@@ -160,13 +152,15 @@ cd c://Users/ASUS/Desktop/my-project
 set OMP_NUM_THREADS=1
 set MKL_NUM_THREADS=1
 set NUMEXPR_NUM_THREADS=1
-qrun config_new.yaml
+set OPENBLAS_NUM_THREADS=1
+qrun config_qrun.yaml
 
 # Linux / macOS
 export OMP_NUM_THREADS=1
 export MKL_NUM_THREADS=1
 export NUMEXPR_NUM_THREADS=1
-qrun config_new.yaml
+export OPENBLAS_NUM_THREADS=1
+qrun config_qrun.yaml
 ```
 
 或直接运行 `.bash` 脚本。
@@ -226,19 +220,15 @@ date,symbol,weight,market_value,shares,...
    - 请求频率可能受限，脚本内已添加延时
    - 注意账户配额和数据权限
 
-2. **Qlib 数据下载**
-   - 初次使用需要下载完整的 Qlib 数据源（较大）
-   - 建议设置合理的数据路径
-
-3. **线程限制**
+2. **线程限制**
    - `.bash` 和 `workflow.py` 中已限制 OMP 线程数
    - 防止 LightGBM 和 Numpy 过度并行导致性能下降
 
-4. **内存占用**
+3. **内存占用**
    - CSI300 成分股较多，计算 Alpha 因子耗时较长
    - 建议在配置中合理设置 `alpha_factors` 数量
 
-5. **数据对齐**
+4. **数据对齐**
    - 确保股票列表、日期范围、数据路径配置一致
    - 缺失数据会自动填充或跳过，检查日志以确保数据质量
 

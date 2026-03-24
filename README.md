@@ -92,10 +92,10 @@ JQDATASDK_PASSWORD=your_password
 ├── requirements.txt           # Python 依赖列表
 ├── .env.example              # 环境变量模板
 ├── .bash                      # 方案二的执行脚本
-├── .dump.bin.py               # 数据从csv格式转为bin格式的脚本
+├── .dump.bin.py               # 数据从csv格式转为bin格式的脚本（方案1、方案2均需要）
 ├── config.yaml               # 方案一的配置文件
 ├── config_qrun.yaml           # 方案二的配置文件
-├── data_preparation.py       # 方案一：数据准备模块
+├── data_preparation.py       # 数据准备模块，生成csv文件（方案1、方案2均需要）
 ├── workflow.py               # 方案一：回测工作流
 └── data/
     ├── input/
